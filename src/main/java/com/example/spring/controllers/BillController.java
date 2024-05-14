@@ -3,6 +3,7 @@ package com.example.spring.controllers;
 import com.example.spring.model.entities.Bill;
 import com.example.spring.model.services.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,9 @@ public class BillController {
     private BillService billService;
 
     @GetMapping
-    private ResponseEntity<?> getAllBill(){
-        List<Bill> billList = billService.showAll();
+    private ResponseEntity<?> showBill(@RequestParam(defaultValue = "") String status,@RequestParam(defaultValue = "") String pizzaType, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+        PageRequest pageRequest = PageRequest.of(page,size);
+        List<Bill> billList = billService.filterBill(status, pizzaType, pageRequest);
         if (billList.isEmpty()){
             return ResponseEntity.badRequest().body("There is no order");
         }
@@ -46,18 +48,10 @@ public class BillController {
         return ResponseEntity.ok("Delete successfully");
     }
 
-    @GetMapping("/filter")
-    private ResponseEntity<?> filterBill(@RequestParam(defaultValue = "") String status,@RequestParam(defaultValue = "") String pizzaType ){
-        List<Bill> billList = billService.filterBill(status, pizzaType);
-        if (billList.isEmpty()){
-            return ResponseEntity.badRequest().body("There is no order");
-        }
-        return ResponseEntity.ok(billList);
-    }
-
     @GetMapping("/search")
-    private ResponseEntity<?> searchByName(@RequestParam(defaultValue = "") String name) {
-        List<Bill> billList = billService.searchByName(name);
+    private ResponseEntity<?> searchByName(@RequestParam(defaultValue = "") String name,@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+        PageRequest pageRequest = PageRequest.of(page,size);
+        List<Bill> billList = billService.searchByName(name, pageRequest);
         if (billList.isEmpty()){
             return ResponseEntity.badRequest().body("There is no order");
         }

@@ -3,22 +3,17 @@ package com.example.spring.model.services;
 import com.example.spring.model.entities.Bill;
 import com.example.spring.model.repositories.BillRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BillService implements IBillService {
     @Autowired
     private BillRepo billRepo;
-
-
-    @Override
-    public List<Bill> showAll() {
-        return billRepo.findAll();
-    }
 
     @Override
     public Bill addNewBill(Bill newBill) {
@@ -36,7 +31,6 @@ public class BillService implements IBillService {
 
     @Override
     public Boolean deleteBill(Long id) {
-        Optional<Bill> bill = billRepo.findById(id);
         if(existById(id))
         {
             billRepo.deleteById(id);
@@ -46,13 +40,15 @@ public class BillService implements IBillService {
     }
 
     @Override
-    public List<Bill> searchByName(String name) {
-        return billRepo.searchBillByFullNameIsContainingIgnoreCase(name);
+    public List<Bill> searchByName(String name, Pageable pageable) {
+        Page<Bill> billPage = billRepo.searchBillByFullNameIsContainingIgnoreCase(name, pageable);
+        return billPage.getContent();
     }
 
     @Override
-    public List<Bill> filterBill(String status, String pizzaType) {
-        return billRepo.searchBillByStatusContainingIgnoreCaseAndPizzaTypeContainingIgnoreCase(status, pizzaType);
+    public List<Bill> filterBill(String status, String pizzaType, Pageable pageable) {
+        Page<Bill> billPage = billRepo.searchBillByStatusContainingIgnoreCaseAndPizzaTypeContainingIgnoreCase(status, pizzaType, pageable);
+        return billPage.getContent();
     }
 
     @Override
