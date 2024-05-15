@@ -1,28 +1,27 @@
 const filter = document.querySelector('#btn-filter')
+var currentPage = 0;
+
+const prevBtn = document.querySelector('#prev')
+const nextBtn = document.querySelector('#next')
 
 filter.addEventListener('click', (e) => {
-    const statusValue = document.querySelector('#select-status').value
-    const pizzaTypeValue = document.querySelector('#select-pizza').value
+    filterFunc();
+})
 
-    const requestData = {
-        status: `${statusValue}`,
-        pizzaType: `${pizzaTypeValue}`,
-        page: ''
+nextBtn.addEventListener('click', (e) => {
+    currentPage++
+    console.log(currentPage);
+    filterFunc();
+})
+
+prevBtn.addEventListener('click', (e) => {
+    if(currentPage === 0) {
+        console.log('nuh uh');
+        return
     }
-
-    const url = new URL('http://localhost:8080/bill')
-    url.search = new URLSearchParams(requestData).toString();
-
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            tableBody.innerHTML = ''
-            showData(data)
-        })
-        .catch(error => {
-            console.log('Error', error);
-        })
+    currentPage--
+    console.log(currentPage);
+    filterFunc();
 })
 
 
@@ -47,3 +46,28 @@ function showData(data) {
     })
 }
 
+function filterFunc() {
+    const statusValue = document.querySelector('#select-status').value
+    const pizzaTypeValue = document.querySelector('#select-pizza').value
+
+    const requestData = {
+        status: `${statusValue}`,
+        pizzaType: `${pizzaTypeValue}`,
+        page: `${currentPage}`
+    }
+
+    const url = new URL('http://localhost:8080/bill')
+    url.search = new URLSearchParams(requestData).toString();
+
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            tableBody.innerHTML = ''
+            showData(data)
+        })
+        .catch(error => {
+            currentPage--
+            console.log('Error', error);
+        })
+}
