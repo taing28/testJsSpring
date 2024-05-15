@@ -25,12 +25,11 @@ filter.addEventListener('click', (e) => {
         })
 })
 
-// console.log(tableBody);
 
 function showData(data) {
     data.map((value, index) => {
         tableBody.innerHTML += `<tr>
-      <td>${index + 1}</td>
+      <td>${value.id}</td>
       <td>${value.combo}</td>
       <td>${value.pizzaType}</td>
       <td>${value.drink}</td>
@@ -39,7 +38,9 @@ function showData(data) {
       <td>${value.phone}</td>
       <td>${value.status}</td>
       <td>
-        <button class="btn btn-outline-dark">Chi tiet</button>
+      <button class="btn btn-outline-dark detail-btn" type="button" data-toggle="modal" data-target="#exampleModal">
+      Chi tiet
+    </button>
         <button class="btn btn-outline-dark">Xoa</button>
       </td>
     </tr>`

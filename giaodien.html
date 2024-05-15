@@ -57,7 +57,7 @@
           </div>
           <div class="col-sm-5"></div>
           <div class="col-sm-4">
-            <div class="search-box d-flex">
+            <div id="search-box" class="search-box d-flex">
               <input type="text" class="w-100">
               <button class="btn btn-primary">Search</button>
             </div>
@@ -85,7 +85,7 @@
     </div>
   </div>
   <!-- Modal edit mới khóa học -->
-  <form id="modal-form">
+  <form id="modal-form" class="">
     <div id="exampleModal" class="modal fade" tabindex="-1">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -206,7 +206,7 @@
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-info" id="btn-confirm">Confirm</button>
-            <button type="button" class="btn btn-secondary" id="btn-cancel">Cancel</button>
+            <button type="button" class="btn btn-secondary" id="btn-cancel" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
@@ -216,6 +216,7 @@
   <script src="showData.js"></script>
   <script src="filter.js"></script>
   <script src="createNew.js"></script>
+  <script src="search.js"></script>
+  <script src="detail.js"></script>
 </body>
-
 </html>
