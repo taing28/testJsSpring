@@ -37,9 +37,10 @@ fetch(backendUrl)
       <td>${value.phone}</td>
       <td>${value.status}</td>
       <td>
-        <button class="btn btn-outline-dark">Chi tiet</button>
+        <button class="btn btn-outline-dark detail-btn">Chi tiet</button>
         <button class="btn btn-outline-dark">Xoa</button>
       </td>
     </tr>`
     })
   }
+
