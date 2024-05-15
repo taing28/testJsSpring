@@ -1,187 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 41.55 - Danh Sách Đơn Hàng</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <!-- Import Datatable sau jquery -->
-    <!-- Import them style bootstrap cho datatable -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 mb-3">
-                <h4 class="text-center m-4"><b>DANH SÁCH ĐƠN HÀNG</b></h4>
-                <div class="container jumbotron py-4">
-                    <div class="row form-group">
-                      <label class="col-sm-2 col-form-label">Trạng thái Order:</label>
-                      <div class="col-sm-3">
-                        <select id="select-status" class="form-control">
-                            <option value="">All</option>
-                            <option value="open">Open</option>
-                            <option value="confirm">Confirm</option>
-                            <option value="cancel">Cancel</option>
-                        </select>
-                      </div>
-                      <label class="col-sm-2 col-form-label">Loại pizza:</label>
-                      <div class="col-sm-3">
-                        <select id="select-pizza" class="form-control">
-                            <option value="">All</option>
-                            <option value="hawaii">Hawaii</option>
-                            <option value="bacon">Bacon</option>
-                            <option value="seafood">Seafood</option>
-                        </select>
-                      </div>
-                      <div class="col-sm-2">
-                        <button class="btn btn-primary" id="btn-filter">Lọc</button>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class="row mb-4">
-                    <div class="col-sm-3">
-                      <button class="btn btn-info">Create New</button>
-                    </div>
-                    <div class="col-sm-5"></div>
-                    <div class="col-sm-4">
-                      <div class="search-box d-flex">
-                        <input type="text" class="w-100">
-                        <button class="btn btn-primary">Search</button>
-                      </div>
-                    </div>
-                  </div>
-                <table id="tbl-order" class="table text-center table-hover table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">Order ID</th>
-                        <th scope="col">Kích cỡ Combo</th>
-                        <th scope="col">Loại pizza</th>
-                        <th scope="col">Nước uống</th>
-                        <th scope="col">Thành tiền</th>
-                        <th scope="col">Họ và tên</th>
-                        <th scope="col">Số điện thoại</th>
-                        <th scope="col">Trạng thái</th>
-                        <th scope="col">Chi tiết</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      
-                    </tbody>
-                </table>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 41.55 - Danh Sách Đơn Hàng</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <!-- Import Datatable sau jquery -->
+  <!-- Import them style bootstrap cho datatable -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 mb-3">
+        <h4 class="text-center m-4"><b>DANH SÁCH ĐƠN HÀNG</b></h4>
+        <div class="container jumbotron py-4">
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Trạng thái Order:</label>
+            <div class="col-sm-3">
+              <select id="select-status" class="form-control">
+                <option value="">All</option>
+                <option value="open">Open</option>
+                <option value="confirm">Confirm</option>
+                <option value="cancel">Cancel</option>
+              </select>
             </div>
-        </div>
-    </div>
-    <!-- Modal edit mới khóa học -->
-    <div>
-      <div id="detail-course-modal" class="modal faded" tabindex="-1">
-          <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="h5-modal-title">Order Detail!!!</h5>
-                  <button class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <div class="modal-body">
-                  <form>
-                    <div class="col-10 mx-auto">
-                      <div class="row form-group">
-                        <label class="col-4">Order ID(mã đơn hàng):</label>
-                        <input type="text" class="form-control col-8" id="input-orderCode" placeholder="Order ID">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Có Combo:</label>
-                        <input type="text" class="form-control col-8" id="input-combo" placeholder="Combo">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Đường kính:</label>
-                        <input type="text" class="form-control col-8" id="input-duong-kinh" placeholder="Đường kính">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Sườn nướng(miếng):</label>
-                        <input type="text" class="form-control col-8" id="input-suon" placeholder="Sườn nướng">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Đồ uống:</label>
-                        <input type="text" class="form-control col-8" id="input-drink" placeholder="Đồ uống">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Số lượng nước uống:</label>
-                        <input type="text" class="form-control col-8" id="input-drink-number" placeholder="Số lượng nước uống">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Voucher ID:</label>
-                        <input type="text" class="form-control col-8" id="input-voucherid" placeholder="Voucher ID">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Loại pizza:</label>
-                        <input type="text" class="form-control col-8" id="input-pizza" placeholder="Loại pizza">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Salad:</label>
-                        <input type="text" class="form-control col-8" id="input-salad" placeholder="Salad">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Thành tiền:</label>
-                        <input type="text" class="form-control col-8" id="input-tien" placeholder="Thành tiền">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Giảm giá:</label>
-                        <input type="text" class="form-control col-8" id="input-giam-gia" placeholder="Giảm giá">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Họ và tên:</label>
-                        <input type="text" class="form-control col-8" id="input-ho-ten" placeholder="Họ và tên">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Email:</label>
-                        <input type="text" class="form-control col-8" id="input-email" placeholder="Email">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Số điện thoại:</label>
-                        <input type="text" class="form-control col-8" id="input-so-dien-thoai" placeholder="Số điện thoại">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Địa chỉ:</label>
-                        <input type="text" class="form-control col-8" id="input-dia-chi" placeholder="Địa chỉ">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Lời nhắn:</label>
-                        <input type="text" class="form-control col-8" id="input-message" placeholder="Lời nhắn">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Trạng thái đơn hàng:</label>
-                        <input type="text" class="form-control col-8" id="input-trang-thai" placeholder="Trạng thái">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Ngày tạo đơn:</label>
-                        <input type="text" class="form-control col-8" id="input-ngay-tao" placeholder="Ngày tạo">
-                      </div>
-                      <div class="row form-group">
-                        <label class="col-4">Ngày cập nhật:</label>
-                        <input type="text" class="form-control col-8" id="input-ngay-cap-nhat" placeholder="Ngày cập nhật">
-                      </div>
-                    </div>
-                  </form>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-info" id="btn-confirm">Confirm</button>
-                <button class="btn btn-secondary" id="btn-cancel">Cancel</button>
-              </div>
-              </div>
+            <label class="col-sm-2 col-form-label">Loại pizza:</label>
+            <div class="col-sm-3">
+              <select id="select-pizza" class="form-control">
+                <option value="">All</option>
+                <option value="hawaii">Hawaii</option>
+                <option value="bacon">Bacon</option>
+                <option value="seafood">Seafood</option>
+              </select>
+            </div>
+            <div class="col-sm-2">
+              <button class="btn btn-primary" id="btn-filter">Lọc</button>
+            </div>
           </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-sm-3">
+            <button class="btn btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
+              Create New
+            </button>
+          </div>
+          <div class="col-sm-5"></div>
+          <div class="col-sm-4">
+            <div class="search-box d-flex">
+              <input type="text" class="w-100">
+              <button class="btn btn-primary">Search</button>
+            </div>
+          </div>
+        </div>
+        <table id="tbl-order" class="table text-center table-hover table-bordered table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Order ID</th>
+              <th scope="col">Kích cỡ Combo</th>
+              <th scope="col">Loại pizza</th>
+              <th scope="col">Nước uống</th>
+              <th scope="col">Thành tiền</th>
+              <th scope="col">Họ và tên</th>
+              <th scope="col">Số điện thoại</th>
+              <th scope="col">Trạng thái</th>
+              <th scope="col">Chi tiết</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
       </div>
+    </div>
   </div>
+  <!-- Modal edit mới khóa học -->
+  <form id="modal-form">
+    <div id="exampleModal" class="modal fade" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="h5-modal-title">Order Detail!!!</h5>
+            <button class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="col-10 mx-auto">
+                <div class="row form-group">
+                  <label class="col-4">Order ID(mã đơn hàng):</label>
+                  <input name="id" type="text" class="form-control col-8" id="input-orderCode" placeholder="Order ID">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Có Combo:</label>
+                  <select name="combo" class="form-control col-8" id="input-combo">
+                    <option value=""></option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                  </select>
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Đường kính:</label>
+                  <input name="diameter" type="text" class="form-control col-8" id="input-duong-kinh"
+                    placeholder="Đường kính">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Sườn nướng(miếng):</label>
+                  <input name="bakedRibs" type="text" class="form-control col-8" id="input-suon"
+                    placeholder="Sườn nướng">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Đồ uống:</label>
+                  <select name="drink" class="form-control col-8" id="input-drink">
+                    <option value=""></option>
+                    <option value="Mirinda">Mirinda</option>
+                    <option value="Pepsi">Pepsi</option>
+                    <option value="Coca">Coca</option>
+                  </select>
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Số lượng nước uống:</label>
+                  <input name="drinkQuantity" type="text" class="form-control col-8" id="input-drink-number"
+                    placeholder="Số lượng nước uống">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Voucher ID:</label>
+                  <input name="voucherId" type="text" class="form-control col-8" id="input-voucherid"
+                    placeholder="Voucher ID">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Loại pizza:</label>
+                    <select name="pizzaType" id="input-pizza" class="form-control col-8">
+                      <option value=""></option>
+                      <option value="Hawaii">Hawaii</option>
+                      <option value="Bacon">Bacon</option>
+                      <option value="Seafood">Seafood</option>
+                    </select>
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Salad:</label>
+                  <input name="salad" type="text" class="form-control col-8" id="input-salad" placeholder="Salad">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Thành tiền:</label>
+                  <input name="totalPrice" type="text" class="form-control col-8" id="input-tien"
+                    placeholder="Thành tiền">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Giảm giá:</label>
+                  <input name="sale" type="text" class="form-control col-8" id="input-giam-gia" placeholder="Giảm giá">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Họ và tên:</label>
+                  <input name="fullName" type="text" class="form-control col-8" id="input-ho-ten"
+                    placeholder="Họ và tên">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Email:</label>
+                  <input name="email" type="text" class="form-control col-8" id="input-email" placeholder="Email">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Số điện thoại:</label>
+                  <input name="phone" type="text" class="form-control col-8" id="input-so-dien-thoai"
+                    placeholder="Số điện thoại">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Địa chỉ:</label>
+                  <input name="address" type="text" class="form-control col-8" id="input-dia-chi" placeholder="Địa chỉ">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Lời nhắn:</label>
+                  <input name="note" type="text" class="form-control col-8" id="input-message" placeholder="Lời nhắn">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Trạng thái đơn hàng:</label>
+                    <select name="status" id="input-trang-thai" class="form-control col-8">
+                      <option value=""></option>
+                      <option value="Open">Open</option>
+                      <option value="Confirm">Confirm</option>
+                      <option value="Cancel">Cancel</option>
+                    </select>
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Ngày tạo đơn:</label>
+                  <input name="createDate" type="text" class="form-control col-8" id="input-ngay-tao"
+                    placeholder="Ngày tạo">
+                </div>
+                <div class="row form-group">
+                  <label class="col-4">Ngày cập nhật:</label>
+                  <input name="updateDate" type="text" class="form-control col-8" id="input-ngay-cap-nhat"
+                    placeholder="Ngày cập nhật">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-info" id="btn-confirm">Confirm</button>
+            <button type="button" class="btn btn-secondary" id="btn-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 
   <script src="showData.js"></script>
   <script src="filter.js"></script>
+  <script src="createNew.js"></script>
 </body>
 
 </html>
