@@ -25,10 +25,10 @@ fetch(backendUrl)
   const tableBody = document.querySelector('#tbl-order tbody')
   // console.log(tableBody);
 
-  function showData(data){
+  function showData(data) {
     data.map((value, index) => {
-      tableBody.innerHTML += `<tr>
-      <td>${index+1}</td>
+        tableBody.innerHTML += `<tr>
+      <td>${value.id}</td>
       <td>${value.combo}</td>
       <td>${value.pizzaType}</td>
       <td>${value.drink}</td>
@@ -37,10 +37,27 @@ fetch(backendUrl)
       <td>${value.phone}</td>
       <td>${value.status}</td>
       <td>
-        <button class="btn btn-outline-dark detail-btn">Chi tiet</button>
-        <button class="btn btn-outline-dark">Xoa</button>
+      <button id="detail-${value.id}" class="btn btn-outline-dark detail-btn" type="button" data-toggle="modal" data-target="#exampleModal">
+      Chi tiet
+    </button>
+        <button class="btn btn-outline-dark delete-btn">Xoa</button>
       </td>
     </tr>`
     })
-  }
 
+    data.map((value, index) => {
+      const detailBtn = document.querySelector(`#detail-${value.id}`)
+      
+      detailBtn.addEventListener('click', (e) => {
+        let orderId = document.querySelector('#input-orderCode')
+        orderId.value = `${value.id}`
+        let inputCombo = document.querySelector('#input-combo')
+        inputCombo.value = `${value.combo}`
+        let inputDuongKinh = document.querySelector('#input-duong-kinh')
+        inputDuongKinh.value = `${value.diameter}`
+        let inputSuon = document.querySelector('#input-suon')
+        inputSuon.value = `${value.bakedRibs}`
+        // ... To be continued
+      })
+    })
+}

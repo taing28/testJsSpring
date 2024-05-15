@@ -1,58 +1,61 @@
 const filter = document.querySelector('#btn-filter')
+const searchBox = document.querySelector('#search-box')
+const searchButton = searchBox.querySelector('button')
+
+const pageNumb = document.querySelector('#page-number')
+
 var currentPage = 0;
 
 const prevBtn = document.querySelector('#prev')
 const nextBtn = document.querySelector('#next')
 
 filter.addEventListener('click', (e) => {
-    filterFunc();
+    const statusValue = document.querySelector('#select-status').value
+    const pizzaTypeValue = document.querySelector('#select-pizza').value
+    filterFunc(statusValue, pizzaTypeValue, '');
+})
+
+searchButton.addEventListener('click', (e) => {
+    const statusValue = document.querySelector('#select-status').value
+    const pizzaTypeValue = document.querySelector('#select-pizza').value
+    const searchValue = searchBox.querySelector('input').value.trim()
+
+    filterFunc(statusValue, pizzaTypeValue, searchValue);
 })
 
 nextBtn.addEventListener('click', (e) => {
+    const statusValue = document.querySelector('#select-status').value
+    const pizzaTypeValue = document.querySelector('#select-pizza').value
+    const searchValue = searchBox.querySelector('input').value.trim()
+
     currentPage++
     console.log(currentPage);
-    filterFunc();
+    filterFunc(statusValue, pizzaTypeValue, searchValue);
+    pageNumb.innerHTML = `${currentPage+1}`
 })
 
 prevBtn.addEventListener('click', (e) => {
-    if(currentPage === 0) {
+    const statusValue = document.querySelector('#select-status').value
+    const pizzaTypeValue = document.querySelector('#select-pizza').value
+    const searchValue = searchBox.querySelector('input').value.trim()
+
+    if (currentPage === 0) {
         console.log('nuh uh');
         return
     }
+    
     currentPage--
     console.log(currentPage);
-    filterFunc();
+    filterFunc(statusValue, pizzaTypeValue, searchValue);
+    pageNumb.innerHTML = `${currentPage+1}`
 })
 
 
-function showData(data) {
-    data.map((value, index) => {
-        tableBody.innerHTML += `<tr>
-      <td>${value.id}</td>
-      <td>${value.combo}</td>
-      <td>${value.pizzaType}</td>
-      <td>${value.drink}</td>
-      <td>${value.totalPrice}</td>
-      <td>${value.fullName}</td>
-      <td>${value.phone}</td>
-      <td>${value.status}</td>
-      <td>
-      <button class="btn btn-outline-dark detail-btn" type="button" data-toggle="modal" data-target="#exampleModal">
-      Chi tiet
-    </button>
-        <button class="btn btn-outline-dark">Xoa</button>
-      </td>
-    </tr>`
-    })
-}
-
-function filterFunc() {
-    const statusValue = document.querySelector('#select-status').value
-    const pizzaTypeValue = document.querySelector('#select-pizza').value
-
+function filterFunc(status, pizzaType, name) {
     const requestData = {
-        status: `${statusValue}`,
-        pizzaType: `${pizzaTypeValue}`,
+        status: status,
+        pizzaType: pizzaType,
+        name: name,
         page: `${currentPage}`
     }
 
