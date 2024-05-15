@@ -17,7 +17,7 @@ public class BillController {
     private BillService billService;
 
     @GetMapping
-    private ResponseEntity<?> showBill(@RequestParam(defaultValue = "") String status,@RequestParam(defaultValue = "") String pizzaType, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    private ResponseEntity<?> showBill(@RequestParam(defaultValue = "") String status,@RequestParam(defaultValue = "") String pizzaType, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "6") int size){
         PageRequest pageRequest = PageRequest.of(page,size);
         List<Bill> billList = billService.filterBill(status, pizzaType, pageRequest);
         if (billList.isEmpty()){
@@ -49,7 +49,7 @@ public class BillController {
     }
 
     @GetMapping("/search")
-    private ResponseEntity<?> searchByName(@RequestParam(defaultValue = "") String name,@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+    private ResponseEntity<?> searchByName(@RequestParam(defaultValue = "") String name,@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "6") int size) {
         PageRequest pageRequest = PageRequest.of(page,size);
         List<Bill> billList = billService.searchByName(name, pageRequest);
         if (billList.isEmpty()){
