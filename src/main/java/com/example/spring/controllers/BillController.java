@@ -17,9 +17,9 @@ public class BillController {
     private BillService billService;
 
     @GetMapping
-    private ResponseEntity<?> showBill(@RequestParam(defaultValue = "") String status,@RequestParam(defaultValue = "") String pizzaType, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "6") int size){
+    private ResponseEntity<?> showBill(@RequestParam(defaultValue = "") String status,@RequestParam(defaultValue = "") String pizzaType, @RequestParam(defaultValue = "") String name, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "6") int size){
         PageRequest pageRequest = PageRequest.of(page,size);
-        List<Bill> billList = billService.filterBill(status, pizzaType, pageRequest);
+        List<Bill> billList = billService.filterBill(status, pizzaType, name, pageRequest);
         if (billList.isEmpty()){
             return ResponseEntity.badRequest().body("There is no order");
         }
@@ -48,13 +48,4 @@ public class BillController {
         return ResponseEntity.ok("Delete successfully");
     }
 
-    @GetMapping("/search")
-    private ResponseEntity<?> searchByName(@RequestParam(defaultValue = "") String name,@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "6") int size) {
-        PageRequest pageRequest = PageRequest.of(page,size);
-        List<Bill> billList = billService.searchByName(name, pageRequest);
-        if (billList.isEmpty()){
-            return ResponseEntity.badRequest().body("There is no order");
-        }
-        return ResponseEntity.ok(billList);
-    }
 }

@@ -9,8 +9,7 @@ public interface IBillService {
     Bill addNewBill(Bill newBill);
     Bill updateBill(Bill reBill);
     Boolean deleteBill(Long id);
-    List<Bill> searchByName(String name, Pageable pageable);
-    List<Bill> filterBill(String status, String pizzaType, Pageable pageable);
+    List<Bill> filterBill(String status, String pizzaType, String name, Pageable pageable);
 
     Boolean existById(Long id);
 }

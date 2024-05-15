@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface BillRepo extends JpaRepository<Bill, Long> {
     Page<Bill> findAll(Pageable pageable);
     Page<Bill> searchBillByFullNameIsContainingIgnoreCase(String name, Pageable pageable);
-    Page<Bill> searchBillByStatusContainingIgnoreCaseAndPizzaTypeContainingIgnoreCase(String status, String pizzaType, Pageable pageable);
+    Page<Bill> searchBillByStatusContainingIgnoreCaseAndPizzaTypeContainingIgnoreCaseAndFullNameContainingIgnoreCase(String status, String pizzaType, String name, Pageable pageable);
 }

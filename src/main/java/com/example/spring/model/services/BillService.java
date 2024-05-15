@@ -40,14 +40,8 @@ public class BillService implements IBillService {
     }
 
     @Override
-    public List<Bill> searchByName(String name, Pageable pageable) {
-        Page<Bill> billPage = billRepo.searchBillByFullNameIsContainingIgnoreCase(name, pageable);
-        return billPage.getContent();
-    }
-
-    @Override
-    public List<Bill> filterBill(String status, String pizzaType, Pageable pageable) {
-        Page<Bill> billPage = billRepo.searchBillByStatusContainingIgnoreCaseAndPizzaTypeContainingIgnoreCase(status, pizzaType, pageable);
+    public List<Bill> filterBill(String status, String pizzaType, String name,Pageable pageable) {
+        Page<Bill> billPage = billRepo.searchBillByStatusContainingIgnoreCaseAndPizzaTypeContainingIgnoreCaseAndFullNameContainingIgnoreCase(status, pizzaType, name, pageable);
         return billPage.getContent();
     }
 
