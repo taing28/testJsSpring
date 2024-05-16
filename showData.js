@@ -96,6 +96,7 @@ function showData(data) {
       if (confirm(`Are you sure want to delete order ${value.id}`)) {
         removeFunction(value.id)
         alert('Xoa thanh cong, refresh trang de cap nhat!')
+        location.reload()
       }
     })
   })
