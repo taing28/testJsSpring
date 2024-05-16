@@ -2,16 +2,15 @@ const filter = document.querySelector('#btn-filter')
 const searchBox = document.querySelector('#search-box')
 const searchButton = searchBox.querySelector('button')
 
-const pageNumb = document.querySelector('#page-number')
 
-var currentPage = 0;
-
-const prevBtn = document.querySelector('#prev')
-const nextBtn = document.querySelector('#next')
 
 filter.addEventListener('click', (e) => {
     const statusValue = document.querySelector('#select-status').value
     const pizzaTypeValue = document.querySelector('#select-pizza').value
+    console.log('clicked filter');
+
+    currentPage = 0;
+    pageNumb.innerHTML = '1'
     filterFunc(statusValue, pizzaTypeValue, '');
 })
 
@@ -19,37 +18,11 @@ searchButton.addEventListener('click', (e) => {
     const statusValue = document.querySelector('#select-status').value
     const pizzaTypeValue = document.querySelector('#select-pizza').value
     const searchValue = searchBox.querySelector('input').value.trim()
+    currentPage = 0;
+    pageNumb.innerHTML = '1'
 
     filterFunc(statusValue, pizzaTypeValue, searchValue);
 })
-
-nextBtn.addEventListener('click', (e) => {
-    const statusValue = document.querySelector('#select-status').value
-    const pizzaTypeValue = document.querySelector('#select-pizza').value
-    const searchValue = searchBox.querySelector('input').value.trim()
-
-    currentPage++
-    console.log(currentPage);
-    filterFunc(statusValue, pizzaTypeValue, searchValue);
-    pageNumb.innerHTML = `${currentPage+1}`
-})
-
-prevBtn.addEventListener('click', (e) => {
-    const statusValue = document.querySelector('#select-status').value
-    const pizzaTypeValue = document.querySelector('#select-pizza').value
-    const searchValue = searchBox.querySelector('input').value.trim()
-
-    if (currentPage === 0) {
-        console.log('nuh uh');
-        return
-    }
-    
-    currentPage--
-    console.log(currentPage);
-    filterFunc(statusValue, pizzaTypeValue, searchValue);
-    pageNumb.innerHTML = `${currentPage+1}`
-})
-
 
 function filterFunc(status, pizzaType, name) {
     const requestData = {
@@ -62,7 +35,6 @@ function filterFunc(status, pizzaType, name) {
     const url = new URL('http://localhost:8080/bill')
     url.search = new URLSearchParams(requestData).toString();
 
-
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -70,7 +42,16 @@ function filterFunc(status, pizzaType, name) {
             showData(data)
         })
         .catch(error => {
-            currentPage--
+            alert('There is no order')
             console.log('Error', error);
+            if (currentPage === 0) {
+                currentPage = 0
+                pageNumb.innerHTML = `${currentPage + 1}`
+            }
+            if (currentPage > 0) {
+                currentPage--
+                pageNumb.innerHTML = `${currentPage + 1}`
+            }
+
         })
 }

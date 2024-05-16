@@ -5,7 +5,6 @@ const modalDetail = document.querySelector('#detail-course-modal')
 const modalForm = document.querySelector('#modal-form')
 
 modalForm.addEventListener('submit', (e) => {
-    e.preventDefault()
 
     let input = e.target
 
@@ -30,7 +29,7 @@ modalForm.addEventListener('submit', (e) => {
         createDate: input.createDate.value,
         updateDate: input.updateDate.value
     }
-    
+
     //Xoa cac truong null truoc khi gui
     for (var key in requestBody) {
         if ((requestBody[key] === null | requestBody[key] === undefined | requestBody[key] === "") && requestBody.hasOwnProperty(key)) {
@@ -38,7 +37,7 @@ modalForm.addEventListener('submit', (e) => {
         }
     }
 
-    if (requestBody.id === undefined) {
+    if (requestBody.id === undefined || requestBody.id === null || requestBody.id === "") {
         fetch(url, {
             method: 'POST',
             headers: {
@@ -56,6 +55,7 @@ modalForm.addEventListener('submit', (e) => {
             })
             .then(data => {
                 console.log('Server response:', data);
+                alert('add successful')
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
@@ -80,11 +80,37 @@ modalForm.addEventListener('submit', (e) => {
             })
             .then(data => {
                 console.log('Server response:', data);
+                alert('update successful')
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
             })
     }
+})
+
+//Refresh modal data
+const createBtn = document.querySelector('#create-new-btn')
+
+createBtn.addEventListener('click', e => {
+    orderId.value = ``
+    inputCombo.value = ``
+    inputDuongKinh.value = ``
+    inputSuon.value = ``
+    inputDrink.value = ``
+    inputDrinkNumber.value = ``
+    inputVoucherId.value = ``
+    inputPizza.value = ``
+    inputSalad.value = ``
+    inputTien.value = ``
+    inputGiamGia.value = ``
+    inputHoTen.value = ``
+    inputEmail.value = ``
+    inputSoDienThoai.value = ``
+    inputDiaChi.value = ``
+    inputMessage.value = ``
+    inputTrangThai.value = ``
+    inputNgayTao.value = ``
+    inputNgayCapNhat.value = ``
 })
 
 function removeFunction(id) {

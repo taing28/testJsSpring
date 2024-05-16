@@ -1,6 +1,26 @@
 // Endpoint của backend
 const backendUrl = 'http://localhost:8080/bill';
 
+var orderId = document.querySelector('#input-orderCode')
+var inputCombo = document.querySelector('#input-combo')
+var inputDuongKinh = document.querySelector('#input-duong-kinh')
+var inputSuon = document.querySelector('#input-suon')
+var inputDrink = document.querySelector('#input-drink')
+var inputDrinkNumber = document.querySelector('#input-drink-number')
+var inputVoucherId = document.querySelector('#input-voucherid')
+var inputPizza = document.querySelector('#input-pizza')
+var inputSalad = document.querySelector('#input-salad')
+var inputTien = document.querySelector('#input-tien')
+var inputGiamGia = document.querySelector('#input-giam-gia')
+var inputHoTen = document.querySelector('#input-ho-ten')
+var inputEmail = document.querySelector('#input-email')
+var inputSoDienThoai = document.querySelector('#input-so-dien-thoai')
+var inputDiaChi = document.querySelector('#input-dia-chi')
+var inputMessage = document.querySelector('#input-message')
+var inputTrangThai = document.querySelector('#input-trang-thai')
+var inputNgayTao = document.querySelector('#input-ngay-tao')
+var inputNgayCapNhat = document.querySelector('#input-ngay-cap-nhat')
+
 var fetchedData;
 // Gửi yêu cầu GET đến backend
 fetch(backendUrl)
@@ -22,12 +42,12 @@ fetch(backendUrl)
     console.error('Error fetching data:', error);
   });
 
-  const tableBody = document.querySelector('#tbl-order tbody')
-  // console.log(tableBody);
+const tableBody = document.querySelector('#tbl-order tbody')
+// console.log(tableBody);
 
-  function showData(data) {
-    data.map((value, index) => {
-        tableBody.innerHTML += `<tr>
+function showData(data) {
+  data.map((value, index) => {
+    tableBody.innerHTML += `<tr>
       <td>${value.id}</td>
       <td>${value.combo}</td>
       <td>${value.pizzaType}</td>
@@ -43,59 +63,40 @@ fetch(backendUrl)
         <button id="delete-${value.id}" class="btn btn-outline-dark delete-btn">Xoa</button>
       </td>
     </tr>`
+  })
+
+  data.map((value, index) => {
+    const detailBtn = document.querySelector(`#detail-${value.id}`)
+
+    detailBtn.addEventListener('click', (e) => {
+      orderId.value = `${value.id}`
+      inputCombo.value = `${value.combo}`
+      inputDuongKinh.value = `${value.diameter}`
+      inputSuon.value = `${value.bakedRibs}`
+      inputDrink.value = `${value.drink}`
+      inputDrinkNumber.value = `${value.drinkQuantity}`
+      inputVoucherId.value = `${value.voucherId}`
+      inputPizza.value = `${value.pizzaType}`
+      inputSalad.value = `${value.salad}`
+      inputTien.value = `${value.totalPrice}`
+      inputGiamGia.value = `${value.sale}`
+      inputHoTen.value = `${value.fullName}`
+      inputEmail.value = `${value.email}`
+      inputSoDienThoai.value = `${value.phone}`
+      inputDiaChi.value = `${value.address}`
+      inputMessage.value = `${value.note}`
+      inputTrangThai.value = `${value.status}`
+      inputNgayTao.value = `${value.createDate}`
+      inputNgayCapNhat.value = `${value.updateDate}`
     })
 
-    data.map((value, index) => {
-      const detailBtn = document.querySelector(`#detail-${value.id}`)
-      
-      detailBtn.addEventListener('click', (e) => {
-        let orderId = document.querySelector('#input-orderCode')
-        orderId.value = `${value.id}`
-        let inputCombo = document.querySelector('#input-combo')
-        inputCombo.value = `${value.combo}`
-        let inputDuongKinh = document.querySelector('#input-duong-kinh')
-        inputDuongKinh.value = `${value.diameter}`
-        let inputSuon = document.querySelector('#input-suon')
-        inputSuon.value = `${value.bakedRibs}`
-        let inputDrink = document.querySelector('#input-drink')
-        inputDrink.value = `${value.drink}`
-        let inputDrinkNumber = document.querySelector('#input-drink-number')
-        inputDrinkNumber.value = `${value.drinkQuantity}`
-        let inputVoucherId = document.querySelector('#input-voucherid')
-        inputVoucherId.value = `${value.voucherId}`
-        let inputPizza = document.querySelector('#input-pizza')
-        inputPizza.value = `${value.pizzaType}`
-        let inputSalad = document.querySelector('#input-salad')
-        inputSalad.value = `${value.salad}`
-        let inputTien = document.querySelector('#input-tien')
-        inputTien.value = `${value.totalPrice}`
-        let inputGiamGia = document.querySelector('#input-giam-gia')
-        inputGiamGia.value = `${value.sale}`
-        let inputHoTen = document.querySelector('#input-ho-ten')
-        inputHoTen.value = `${value.fullName}`
-        let inputEmail = document.querySelector('#input-email')
-        inputEmail.value = `${value.email}`
-        let inputSoDienThoai = document.querySelector('#input-so-dien-thoai')
-        inputSoDienThoai.value = `${value.phone}`
-        let inputDiaChi = document.querySelector('#input-dia-chi')
-        inputDiaChi.value = `${value.address}`
-        let inputMessage = document.querySelector('#input-message')
-        inputMessage.value = `${value.note}`
-        let inputTrangThai = document.querySelector('#input-trang-thai')
-        inputTrangThai.value = `${value.status}`
-        let inputNgayTao = document.querySelector('#input-ngay-tao')
-        inputNgayTao.value = `${value.createDate}`
-        let inputNgayCapNhat = document.querySelector('#input-ngay-cap-nhat')
-        inputNgayCapNhat.value = `${value.updateDate}`
-      })
+    const deleteButton = document.querySelector(`#delete-${value.id}`)
 
-      const deleteButton = document.querySelector(`#delete-${value.id}`)
-
-      deleteButton.addEventListener('click', e => {
-        if(confirm(`Are you sure want to delete order ${value.id}`)) {
-          removeFunction(value.id)
-          alert('Xoa thanh cong, refresh trang de cap nhat!')
-        }
-      })
+    deleteButton.addEventListener('click', e => {
+      if (confirm(`Are you sure want to delete order ${value.id}`)) {
+        removeFunction(value.id)
+        alert('Xoa thanh cong, refresh trang de cap nhat!')
+      }
     })
+  })
 }

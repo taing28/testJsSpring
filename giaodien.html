@@ -51,7 +51,8 @@
 
         <div class="row mb-4">
           <div class="col-sm-3">
-            <button class="btn btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
+            <button id="create-new-btn" class="btn btn-info" type="button" data-toggle="modal"
+              data-target="#exampleModal">
               Create New
             </button>
           </div>
@@ -83,14 +84,14 @@
         </table>
       </div>
     </div>
-    
+
     <div class="pageable mb-4 d-flex">
       <button class="btn btn-warning" id="prev">Prev</button>
       <div id="page-number" class="page p-2">1</div>
       <button class="btn btn-secondary" id="next">Next</button>
     </div>
 
-    
+
   </div>
   <!-- Modal edit mới khóa học -->
   <form id="modal-form" class="">
@@ -106,7 +107,8 @@
               <div class="col-10 mx-auto">
                 <div class="row form-group">
                   <label class="col-4">Order ID(mã đơn hàng):</label>
-                  <input name="id" type="text" class="form-control col-8" id="input-orderCode" placeholder="Order ID" disabled>
+                  <input name="id" type="text" class="form-control col-8" id="input-orderCode" placeholder="Order ID"
+                    disabled>
                 </div>
                 <div class="row form-group">
                   <label class="col-4">Có Combo:</label>
@@ -148,12 +150,12 @@
                 </div>
                 <div class="row form-group">
                   <label class="col-4">Loại pizza:</label>
-                    <select name="pizzaType" id="input-pizza" class="form-control col-8">
-                      <option value=""></option>
-                      <option value="Hawaii">Hawaii</option>
-                      <option value="Bacon">Bacon</option>
-                      <option value="Seafood">Seafood</option>
-                    </select>
+                  <select name="pizzaType" id="input-pizza" class="form-control col-8">
+                    <option value=""></option>
+                    <option value="Hawaii">Hawaii</option>
+                    <option value="Bacon">Bacon</option>
+                    <option value="Seafood">Seafood</option>
+                  </select>
                 </div>
                 <div class="row form-group">
                   <label class="col-4">Salad:</label>
@@ -192,12 +194,12 @@
                 </div>
                 <div class="row form-group">
                   <label class="col-4">Trạng thái đơn hàng:</label>
-                    <select name="status" id="input-trang-thai" class="form-control col-8">
-                      <option value=""></option>
-                      <option value="Open">Open</option>
-                      <option value="Confirm">Confirm</option>
-                      <option value="Cancel">Cancel</option>
-                    </select>
+                  <select name="status" id="input-trang-thai" class="form-control col-8">
+                    <option value=""></option>
+                    <option value="Open">Open</option>
+                    <option value="Confirm">Confirm</option>
+                    <option value="Cancel">Cancel</option>
+                  </select>
                 </div>
                 <div class="row form-group">
                   <label class="col-4">Ngày tạo đơn:</label>
@@ -221,11 +223,12 @@
     </div>
   </form>
 
-  
+
 
   <script src="showData.js"></script>
   <script src="filter.js"></script>
   <script src="createUpdateDelete.js"></script>
-  <!-- <script src="detail.js" ></script> -->
+  <script src="paging.js"></script>
 </body>
+
 </html>
