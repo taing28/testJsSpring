@@ -1,6 +1,5 @@
 let url = "http://localhost:8080/bill"
 
-
 const modalDetail = document.querySelector('#detail-course-modal')
 
 const modalForm = document.querySelector('#modal-form')
@@ -31,7 +30,7 @@ modalForm.addEventListener('submit', (e) => {
         createDate: input.createDate.value,
         updateDate: input.updateDate.value
     }
-
+    
     //Xoa cac truong null truoc khi gui
     for (var key in requestBody) {
         if ((requestBody[key] === null | requestBody[key] === undefined | requestBody[key] === "") && requestBody.hasOwnProperty(key)) {
@@ -86,6 +85,25 @@ modalForm.addEventListener('submit', (e) => {
                 console.error('There was a problem with the fetch operation:', error);
             })
     }
-
-
 })
+
+function removeFunction(id) {
+    fetch(`http://localhost:8080/bill/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok')
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log('Server response:', data);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        })
+}

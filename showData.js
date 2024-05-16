@@ -40,7 +40,7 @@ fetch(backendUrl)
       <button id="detail-${value.id}" class="btn btn-outline-dark detail-btn" type="button" data-toggle="modal" data-target="#exampleModal">
       Chi tiet
     </button>
-        <button class="btn btn-outline-dark delete-btn">Xoa</button>
+        <button id="delete-${value.id}" class="btn btn-outline-dark delete-btn">Xoa</button>
       </td>
     </tr>`
     })
@@ -87,6 +87,15 @@ fetch(backendUrl)
         inputNgayTao.value = `${value.createDate}`
         let inputNgayCapNhat = document.querySelector('#input-ngay-cap-nhat')
         inputNgayCapNhat.value = `${value.updateDate}`
+      })
+
+      const deleteButton = document.querySelector(`#delete-${value.id}`)
+
+      deleteButton.addEventListener('click', e => {
+        if(confirm(`Are you sure want to delete order ${value.id}`)) {
+          removeFunction(value.id)
+          alert('Xoa thanh cong, refresh trang de cap nhat!')
+        }
       })
     })
 }
