@@ -57,7 +57,36 @@ fetch(backendUrl)
         inputDuongKinh.value = `${value.diameter}`
         let inputSuon = document.querySelector('#input-suon')
         inputSuon.value = `${value.bakedRibs}`
-        // ... To be continued
+        let inputDrink = document.querySelector('#input-drink')
+        inputDrink.value = `${value.drink}`
+        let inputDrinkNumber = document.querySelector('#input-drink-number')
+        inputDrinkNumber.value = `${value.drinkQuantity}`
+        let inputVoucherId = document.querySelector('#input-voucherid')
+        inputVoucherId.value = `${value.voucherId}`
+        let inputPizza = document.querySelector('#input-pizza')
+        inputPizza.value = `${value.pizzaType}`
+        let inputSalad = document.querySelector('#input-salad')
+        inputSalad.value = `${value.salad}`
+        let inputTien = document.querySelector('#input-tien')
+        inputTien.value = `${value.totalPrice}`
+        let inputGiamGia = document.querySelector('#input-giam-gia')
+        inputGiamGia.value = `${value.sale}`
+        let inputHoTen = document.querySelector('#input-ho-ten')
+        inputHoTen.value = `${value.fullName}`
+        let inputEmail = document.querySelector('#input-email')
+        inputEmail.value = `${value.email}`
+        let inputSoDienThoai = document.querySelector('#input-so-dien-thoai')
+        inputSoDienThoai.value = `${value.phone}`
+        let inputDiaChi = document.querySelector('#input-dia-chi')
+        inputDiaChi.value = `${value.address}`
+        let inputMessage = document.querySelector('#input-message')
+        inputMessage.value = `${value.note}`
+        let inputTrangThai = document.querySelector('#input-trang-thai')
+        inputTrangThai.value = `${value.status}`
+        let inputNgayTao = document.querySelector('#input-ngay-tao')
+        inputNgayTao.value = `${value.createDate}`
+        let inputNgayCapNhat = document.querySelector('#input-ngay-cap-nhat')
+        inputNgayCapNhat.value = `${value.updateDate}`
       })
     })
 }
